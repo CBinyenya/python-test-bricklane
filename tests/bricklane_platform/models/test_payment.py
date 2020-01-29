@@ -26,7 +26,7 @@ class TestPayment(unittest.TestCase):
             "date": "2019-02-01",
         }
 
-        payment = Payment(data)
+        payment = Payment(data, "card")
 
         self.assertEqual(payment.customer_id, 123)
         self.assertEqual(payment.date, datetime(2019, 2, 1))
@@ -38,6 +38,8 @@ class TestPayment(unittest.TestCase):
         self.assertIsInstance(card, Card)
         self.assertEqual(card.card_id, 45)
         self.assertEqual(card.status, "processed")
+        
+    
 
     def test_is_successful(self):
         card = Card()
