@@ -19,3 +19,13 @@ class TestMain(unittest.TestCase):
         result = main(get_path("card_payments_mixed.csv"), "card", Decimal("1.2"))
 
         self.assertEqual(result, expected)
+        
+        expected = (
+            "customer_id,shares\r\n"
+            "345,735.0\r\n"
+            "789,735.0\r\n"
+        )
+
+        result = main(get_path("bank_payments_data.csv"), "bank", Decimal("1.2"))
+
+        self.assertEqual(result, expected)
