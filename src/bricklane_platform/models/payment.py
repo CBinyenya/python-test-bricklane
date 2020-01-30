@@ -4,7 +4,6 @@ from dateutil.parser import parse
 
 from bricklane_platform.models.card import Card
 from bricklane_platform.models.bank_account import BankAccount
-from bricklane_platform.models.util import PaymentType
 from bricklane_platform.config import PAYMENT_FEE_RATE
 
 
