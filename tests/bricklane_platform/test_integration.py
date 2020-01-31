@@ -8,7 +8,7 @@ from bricklane_platform.local_runner import main
 
 class TestMain(unittest.TestCase):
 
-    def test_main(self):
+    def test_main_with_cards(self):
 
         expected = (
             "customer_id,shares\r\n"
@@ -20,6 +20,7 @@ class TestMain(unittest.TestCase):
 
         self.assertEqual(result, expected)
         
+    def test_main_with_bank_accounts(self):
         expected = (
             "customer_id,shares\r\n"
             "345,735.0\r\n"

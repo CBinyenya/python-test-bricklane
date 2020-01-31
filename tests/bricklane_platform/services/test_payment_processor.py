@@ -12,7 +12,7 @@ def create_stub_payment(mock_is_successful):
     return payment
 
 
-class TestPaymentProcessor(unittest.TestCase):
+class TestCardPaymentProcessor(unittest.TestCase):
 
     def setUp(self):
         self.payment_processor = PaymentProcessor()
