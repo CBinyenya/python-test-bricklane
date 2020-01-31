@@ -29,10 +29,7 @@ class Payment(object):
         else:
             raise ValueError("Please provide source either (card or bank)")
         if self.payment_type:
-            self.customer_id = self.payment_type.customer_id
-            self.date = self.payment_type.date
-            self.fee = self.payment_type.fee
-            self.amount = self.payment_type.amount
+            self.__dict__.update(self.payment_type.__dict__)
 
         
     @property
