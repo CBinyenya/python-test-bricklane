@@ -7,8 +7,8 @@ class Card(PaymentType):
     status = None
     
     def __init__(self, data=None):
-        PaymentType.__init__(self, data)
         if data:
+            PaymentType.__init__(self, data)
             self.card_id = int(data["card_id"])
             self.status = data["card_status"]
     
