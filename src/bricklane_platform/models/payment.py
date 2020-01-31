@@ -1,10 +1,5 @@
-from decimal import Decimal
-from dateutil.parser import parse
-
-
 from bricklane_platform.models.card import Card
 from bricklane_platform.models.bank_account import BankAccount
-from bricklane_platform.config import PAYMENT_FEE_RATE
 
 
 class Payment(object):
@@ -23,22 +18,21 @@ class Payment(object):
         self.source = source
         self._card = None
         self._bank_account = None
-
-        self.customer_id = int(data["customer_id"])
-        self.date = parse(data["date"])
-
-        total_amount = Decimal(data["amount"])
-        self.fee = total_amount * PAYMENT_FEE_RATE
-        self.amount = total_amount - self.fee
+        
+        self.payment_type = None
         if source == "card":
-            self.payment_type = Card()
-            self.payment_type.card_id = int(data["card_id"])
-            self.payment_type.status = data["card_status"]
+            self.payment_type = Card(data)
             self._card = self.payment_type
-        else:
-            self.payment_type = BankAccount()
-            self.payment_type.bank_account_id = int(data["bank_account_id"])
+        elif source == "bank":
+            self.payment_type = BankAccount(data)
             self._bank_account = self.payment_type
+        else:
+            raise ValueError("Please provide source either (card or bank)")
+        if self.payment_type:
+            self.customer_id = self.payment_type.customer_id
+            self.date = self.payment_type.date
+            self.fee = self.payment_type.fee
+            self.amount = self.payment_type.amount
 
         
     @property
